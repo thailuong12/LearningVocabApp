@@ -10,7 +10,7 @@ namespace learnVocabularyApi.Controllers
 {   
     [Route("api/[controller]")]
     [ApiController]
-    public class TopicsController
+    public class TopicsController : Controller
     {
         private LearnVocabularyContext _topicContext;
         public TopicsController(LearnVocabularyContext context)
@@ -22,5 +22,16 @@ namespace learnVocabularyApi.Controllers
         {
             return _topicContext.Topics.ToList() ;
         }
+
+        [HttpPost]
+        public ActionResult<Topic> Post([FromBody]Topic value)
+        {
+             _topicContext.Add(value);
+            _topicContext.SaveChanges();
+            return value;
+        }
+
     }
 }
+
+
