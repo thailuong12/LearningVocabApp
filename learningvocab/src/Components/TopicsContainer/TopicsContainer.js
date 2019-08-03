@@ -1,39 +1,29 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Topic from "./Topics/Topic";
 import { map } from "lodash/fp";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import CommonModal from "../common/Modal";
-import AddTopic from "./AddTopic/AddTopic";
-import { getTopics } from "../../Actions/Topic/TopicActions";
+import AddTopicModal from "./AddTopic/AddTopicPopup";
+import AddTopic from "./AddTopic/AddTopicBody";
+import { getTopics, addTopic } from "../../Actions/Topic/TopicActions";
 const TopicsContainer = props => {
-  const { getTopics, topics } = props;
-  // const topics = [
-  //   {
-  //     name: "Education",
-  //     discription: "about schooling stuffs"
-  //   },
-  //   {
-  //     name: "Society",
-  //     discription: "about social life, activities"
-  //   }
-  // ];
+  const { getTopicsAction, topics, addTopicAction } = props;
 
-  function act() {
-    getTopics();
-  }
+  useEffect(() => {
+    getTopicsAction();
+  }, {});
+
   return (
     <div className="TopicsContainer">
       {map(topic => {
         return <Topic key={topic.id} {...topic} />;
       }, topics)}
 
-      <CommonModal
+      <AddTopicModal
         header="Add A Topic"
         buttonName="Add New Topic"
-        body={AddTopic}
+        saveAction={addTopicAction}
       />
-      <button onClick={act} />
     </div>
   );
 };
@@ -45,7 +35,8 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch =>
   bindActionCreators(
     {
-      getTopics
+      getTopicsAction: getTopics,
+      addTopicAction: addTopic
     },
     dispatch
   );

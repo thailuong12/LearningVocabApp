@@ -1,15 +1,21 @@
 import React from "react";
-import { Button, Header, Image, Modal } from "semantic-ui-react";
+import { Button, Header, Modal, Input } from "semantic-ui-react";
 
 const CommonModal = props => {
-  const { header, body, buttonName } = props;
+  const { header, body, buttonName, saveAction } = props;
   return (
-    <Modal
-      trigger={<Button>{buttonName}</Button>}
-      header={header}
-      content={body}
-      actions={["Snooze", { key: "done1", content: "Done", positive: true }]}
-    />
+    <Modal trigger={<Button>{buttonName}</Button>}>
+      <Header content={header} />
+      <Modal.Content>{body}</Modal.Content>
+      <Modal.Actions>
+        <Button color="red" inverted onClick={saveAction}>
+          OK
+        </Button>
+        <Button color="green" inverted>
+          Cancel
+        </Button>
+      </Modal.Actions>
+    </Modal>
   );
 };
 

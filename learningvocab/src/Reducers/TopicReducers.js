@@ -1,8 +1,13 @@
-import { GET_TOPICS, ADD_TOPIC, GET_TOPICS_DONE } from "../Actions/Topic/TopicActionContants";
+import {
+  GET_TOPICS,
+  ADD_TOPIC,
+  GET_TOPICS_DONE,
+  ADD_TOPIC_DONE
+} from "../Actions/Topic/TopicActionContants";
 
 const initialState = {
-  topicList: null,
-  demo :'demoooooo'
+  topicList: [],
+  demo: "demoooooo"
 };
 
 export default (state = initialState, action) => {
@@ -12,11 +17,12 @@ export default (state = initialState, action) => {
         ...state,
         topicList: action.payload
       };
-    case ADD_TOPIC:
+    case ADD_TOPIC_DONE:
       return {
         ...state,
-        demo: action.payload
+        topicList: [...state.topicList, action.payload]
       };
+
     default:
       return state;
   }

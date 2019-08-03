@@ -16,4 +16,4 @@ const AddTopic = () => {
   );
 };
 
-export default AddTopic;
+export default AddTopic();
