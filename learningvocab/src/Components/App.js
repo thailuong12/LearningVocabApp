@@ -10,7 +10,7 @@ function App() {
   return (
     <Provider store={store}>
       <div className="mainApp">
-        <div className="header">TOPICS</div>
+        <div className="header">VOCABULARY</div>
         <TopicsContainer />
       </div>
     </Provider>

@@ -2,7 +2,11 @@ import {
   GET_TOPICS,
   ADD_TOPIC,
   GET_TOPICS_DONE,
-  ADD_TOPIC_DONE
+  ADD_TOPIC_DONE,
+  EDIT_TOPIC,
+  EDIT_TOPIC_DONE,
+  DELETE_TOPIC,
+  DELETE_TOPIC_DONE
 } from "../Actions/Topic/TopicActionContants";
 import TopicFetcher from "../Fetcher/TopicFetcher";
 import { getTopics } from "../Actions/Topic/TopicActions";
@@ -24,6 +28,26 @@ export const addTopic = actions$ => {
     mergeMap(action => {
       return TopicFetcher.addTopic(action.payload).then(res => {
         return { type: ADD_TOPIC_DONE, payload: res };
+      });
+    })
+  );
+};
+export const editTopic = actions$ => {
+  return actions$.pipe(
+    filter(action => action.type === EDIT_TOPIC),
+    mergeMap(action => {
+      return TopicFetcher.editTopic(action.payload).then(res => {
+        return { type: EDIT_TOPIC_DONE, payload: res };
+      });
+    })
+  );
+};
+export const deleteTopic = actions$ => {
+  return actions$.pipe(
+    filter(action => action.type === DELETE_TOPIC),
+    mergeMap(action => {
+      return TopicFetcher.deleteTopic(action.payload).then(res => {
+        return { type: DELETE_TOPIC_DONE, payload: res };
       });
     })
   );

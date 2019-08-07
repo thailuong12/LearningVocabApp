@@ -1,6 +1,6 @@
 class HttpFetch {
   _url = null;
-  endpoint = "https://localhost:44395";
+  endpoint = "https://localhost:5001";
 
   to(path) {
     this._url = `${this.endpoint}/${path}`;

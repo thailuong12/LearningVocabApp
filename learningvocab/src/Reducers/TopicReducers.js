@@ -1,13 +1,11 @@
 import {
-  GET_TOPICS,
-  ADD_TOPIC,
   GET_TOPICS_DONE,
-  ADD_TOPIC_DONE
+  ADD_TOPIC_DONE,
+  DELETE_TOPIC_DONE
 } from "../Actions/Topic/TopicActionContants";
-
+import { filter } from "lodash/fp";
 const initialState = {
-  topicList: [],
-  demo: "demoooooo"
+  topicList: []
 };
 
 export default (state = initialState, action) => {
@@ -21,6 +19,11 @@ export default (state = initialState, action) => {
       return {
         ...state,
         topicList: [...state.topicList, action.payload]
+      };
+    case DELETE_TOPIC_DONE:
+      return {
+        ...state,
+        topicList: filter(v => v.id !== action.payload.id, state.topicList)
       };
 
     default:

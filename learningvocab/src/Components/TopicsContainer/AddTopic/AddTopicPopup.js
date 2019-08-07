@@ -2,54 +2,47 @@ import React, { useState } from "react";
 import { Button, Header, Modal, Input } from "semantic-ui-react";
 import { isEmpty } from "lodash/fp";
 import validate from "validate.js";
-const AddTopicPopupBody = (
-  setNameValue,
-  setDescriptionValue,
-  setNameError,
-  nameError,
-  setDescriptioError,
-  descriptionValue
-) => {
-  const vaidateInput = inputvalue => {
-    const constraints = {
-      inputvalue: {
-        presence: true,
-        length: {
-          minimum: 1
-        }
-      }
-    };
-    return validate({ inputvalue }, constraints);
-  };
-  const handleNameValueChange = e => {
-    const value = e.target.value;
-    const isValueValid = vaidateInput(value);
-    if (!isEmpty(isValueValid)) {
-      setNameError(true);
-    } else {
-      setNameError(false);
-    }
-    setNameValue(value);
-  };
-  const handleDescriptionValueChange = e => {
-    const value = e.target.value;
-    setDescriptionValue(value);
+const AddTopicPopupBody = handleInputChangeByKey => {
+  const handleChange = e => {
+    const { name: key, value } = e.target;
+    handleInputChangeByKey(key, value);
   };
   return (
     <div className="Topic_AddContainer">
       <div className="Topic_inputRow">
         <label>Name :</label>
+        <Input placeholder="Name.." onChange={handleChange} name="nameValue" />
+      </div>
+      <div className="Topic_inputRow">
+        <label>Type :</label>
         <Input
-          placeholder="Name.."
-          onChange={handleNameValueChange}
-          error={nameError}
+          placeholder="Type of word.."
+          onChange={handleChange}
+          name="typeValue"
+        />
+      </div>
+      <div className="Topic_inputRow">
+        <label>Pronunciation :</label>
+        <Input
+          placeholder="Pronunciation.."
+          onChange={handleChange}
+          name="pronunciationValue"
         />
       </div>
       <div className="Topic_inputRow">
         <label>Description :</label>
         <Input
           placeholder="Description.."
-          onChange={handleDescriptionValueChange}
+          onChange={handleChange}
+          name="descriptionValue"
+        />
+      </div>
+      <div className="Topic_inputRow">
+        <label>Example :</label>
+        <Input
+          placeholder="Example.."
+          onChange={handleChange}
+          name="exampleValue"
         />
       </div>
     </div>
@@ -58,34 +51,47 @@ const AddTopicPopupBody = (
 
 const CommonModal = props => {
   const { header, buttonName, saveAction } = props;
+
   const [nameValue, setNameValue] = useState("");
-  const [nameError, setNameError] = useState(false);
   const [descriptionValue, setDescriptionValue] = useState("");
-  const [descriptioError, setDescriptioError] = useState(false);
+  const [typeValue, setTypeValue] = useState("");
+  const [pronunciationValue, setPronunciationValue] = useState("");
+  const [exampleValue, setExampleValue] = useState("");
 
   const [modalOpen, setModalOpen] = useState(false);
   const handleSave = () => {
-    console.log("error", nameError);
-    // saveAction({ name: nameValue, description: descriptionValue });
-    // setModalOpen(false);
+    saveAction({
+      name: nameValue,
+      pronunciation: pronunciationValue,
+      description: descriptionValue,
+      type: typeValue,
+      example: exampleValue
+    });
+    setModalOpen(false);
   };
-  const handleInputChangeByKey = () => {};
+  const handleInputChangeByKey = (key, value) => {
+    switch (key) {
+      case "nameValue":
+        return setNameValue(value);
+      case "typeValue":
+        return setTypeValue(value);
+      case "pronunciationValue":
+        return setPronunciationValue(value);
+      case "descriptionValue":
+        return setDescriptionValue(value);
+      case "exampleValue":
+        return setExampleValue(value);
+      default:
+        break;
+    }
+  };
   return (
     <Modal
       trigger={<Button onClick={() => setModalOpen(true)}>{buttonName}</Button>}
       open={modalOpen}
     >
       <Header content={header} />
-      <Modal.Content>
-        {AddTopicPopupBody(
-          setNameValue,
-          setDescriptionValue,
-          setNameError,
-          nameError,
-          setDescriptioError,
-          descriptioError
-        )}
-      </Modal.Content>
+      <Modal.Content>{AddTopicPopupBody(handleInputChangeByKey)}</Modal.Content>
       <Modal.Actions>
         <Button color="red" inverted onClick={handleSave}>
           OK
