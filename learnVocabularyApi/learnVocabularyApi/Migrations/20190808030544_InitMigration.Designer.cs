@@ -9,8 +9,8 @@ using learnVocabularyApi.Data;
 namespace learnVocabularyApi.Migrations
 {
     [DbContext(typeof(LearnVocabularyContext))]
-    [Migration("20190804081931_AddExampleColumn")]
-    partial class AddExampleColumn
+    [Migration("20190808030544_InitMigration")]
+    partial class InitMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

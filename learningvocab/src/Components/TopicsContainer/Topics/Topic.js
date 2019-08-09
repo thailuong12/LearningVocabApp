@@ -1,5 +1,5 @@
 import React from "react";
-import { Card, Button } from "semantic-ui-react";
+import { Card, Button, Accordion, Icon } from "semantic-ui-react";
 
 const Topic = props => {
   const {
@@ -12,6 +12,17 @@ const Topic = props => {
     example,
     id
   } = props;
+  const state = { activeIndex: 0 };
+
+  const handleClick = (e, titleProps) => {
+    const { index } = titleProps;
+    const { activeIndex } = state;
+    const newIndex = activeIndex === index ? -1 : index;
+
+    state.activeIndex = newIndex;
+  };
+ // const { activeIndex } = state;
+
   return (
     <div className="Topic_Item">
       <Card>
@@ -32,6 +43,7 @@ const Topic = props => {
             </Button>
           </div>
         </Card.Content>
+
       </Card>
     </div>
   );

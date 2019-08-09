@@ -9,7 +9,6 @@ import {
   DELETE_TOPIC_DONE
 } from "../Actions/Topic/TopicActionContants";
 import TopicFetcher from "../Fetcher/TopicFetcher";
-import { getTopics } from "../Actions/Topic/TopicActions";
 import { filter, mergeMap } from "rxjs/operators";
 export const getAllTopic = action$ => {
   return action$.pipe(
@@ -27,7 +26,9 @@ export const addTopic = actions$ => {
     filter(action => action.type === ADD_TOPIC),
     mergeMap(action => {
       return TopicFetcher.addTopic(action.payload).then(res => {
-        return { type: ADD_TOPIC_DONE, payload: res };
+        if (res.success) {
+          return { type: ADD_TOPIC_DONE, payload: res.data };
+        }
       });
     })
   );

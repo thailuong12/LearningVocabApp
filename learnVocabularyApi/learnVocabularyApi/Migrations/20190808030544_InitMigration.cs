@@ -2,7 +2,7 @@
 
 namespace learnVocabularyApi.Migrations
 {
-    public partial class InitialCreate : Migration
+    public partial class InitMigration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -12,7 +12,10 @@ namespace learnVocabularyApi.Migrations
                 {
                     id = table.Column<string>(nullable: false),
                     Name = table.Column<string>(nullable: true),
-                    Description = table.Column<string>(nullable: true)
+                    Description = table.Column<string>(nullable: true),
+                    Type = table.Column<string>(nullable: true),
+                    Pronunciation = table.Column<string>(nullable: true),
+                    Example = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
