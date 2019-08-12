@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace learnVocabularyApi.Results
 {
-    public class TopicResult
+    public class AddVocabResult
     {
         public bool success { get; set; }
-        public Topic data { get; set; }
+        public Vocab data { get; set; }
     }
 }

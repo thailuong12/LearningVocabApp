@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import AddTopicPopupBody from './AddTopicPopupBody';
+import AddVocabPopupBody from './AddVocabPopupBody';
 import { Button, Header, Modal } from "semantic-ui-react";
 
 
@@ -17,7 +17,9 @@ const CommonModal = props => {
       pronunciation: pronunciationValue,
       description: descriptionValue,
       type: typeValue,
-      example: exampleValue
+      example: exampleValue,
+      isMarked: false,
+      isLearning: true
     });
     setModalOpen(false);
   };
@@ -43,7 +45,7 @@ const CommonModal = props => {
       open={modalOpen}
     >
       <Header content={header} />
-      <Modal.Content>{AddTopicPopupBody(handleInputChangeByKey)}</Modal.Content>
+      <Modal.Content>{AddVocabPopupBody(handleInputChangeByKey)}</Modal.Content>
       <Modal.Actions>
         <Button color="red" inverted onClick={handleSave}>
           OK

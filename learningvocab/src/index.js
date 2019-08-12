@@ -1,7 +1,17 @@
 import "rxjs";
-import React from 'react';
-import ReactDOM from 'react-dom';
-import App from './Components/App';
+import React from "react";
+import ReactDOM from "react-dom";
+import App from "./Components/App";
+import store from "./Store";
+import { Provider } from "react-redux";
 
-ReactDOM.render(<App />, document.getElementById('root'));
+const MainApp = () => {
+  return (
+    <Provider store={store}>
+      <App />
+    </Provider>
+  );
+};
 
+
+ReactDOM.render(<MainApp />, document.getElementById("root"));

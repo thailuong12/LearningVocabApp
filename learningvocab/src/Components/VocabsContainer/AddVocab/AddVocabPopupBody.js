@@ -1,17 +1,17 @@
 import React from "react";
 import { Input } from "semantic-ui-react";
-const AddTopicPopupBody = handleInputChangeByKey => {
+const AddVocabPopupBody = handleInputChangeByKey => {
   const handleChange = e => {
     const { name: key, value } = e.target;
     handleInputChangeByKey(key, value);
   };
   return (
-    <div className="Topic_AddContainer">
-      <div className="Topic_inputRow">
+    <div className="Vocab_AddContainer">
+      <div className="Vocab_inputRow">
         <label>Name :</label>
         <Input placeholder="Name.." onChange={handleChange} name="nameValue" />
       </div>
-      <div className="Topic_inputRow">
+      <div className="Vocab_inputRow">
         <label>Type :</label>
         <Input
           placeholder="Type of word.."
@@ -19,7 +19,7 @@ const AddTopicPopupBody = handleInputChangeByKey => {
           name="typeValue"
         />
       </div>
-      <div className="Topic_inputRow">
+      <div className="Vocab_inputRow">
         <label>Pronunciation :</label>
         <Input
           placeholder="Pronunciation.."
@@ -27,7 +27,7 @@ const AddTopicPopupBody = handleInputChangeByKey => {
           name="pronunciationValue"
         />
       </div>
-      <div className="Topic_inputRow">
+      <div className="Vocab_inputRow">
         <label>Description :</label>
         <Input
           placeholder="Description.."
@@ -35,7 +35,7 @@ const AddTopicPopupBody = handleInputChangeByKey => {
           name="descriptionValue"
         />
       </div>
-      <div className="Topic_inputRow">
+      <div className="Vocab_inputRow">
         <label>Example :</label>
         <Input
           placeholder="Example.."
@@ -47,4 +47,4 @@ const AddTopicPopupBody = handleInputChangeByKey => {
   );
 };
 
-export default AddTopicPopupBody;
+export default AddVocabPopupBody;

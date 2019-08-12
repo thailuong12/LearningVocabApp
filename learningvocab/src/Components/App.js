@@ -1,19 +1,25 @@
 import "rxjs";
 import React from "react";
-import TopicsContainer from "./TopicsContainer/TopicsContainer";
+import { BrowserRouter as Router, Route } from "react-router-dom";
+import { hashHistory } from "react-router";
+import VocabsPanes from "./VocabsContainer/VocabPanes";
+import WritingContainer from "./WritingContainer/WritingContainer";
+import WritingContent from "./WritingContainer/WritingContent";
 import "semantic-ui-css/semantic.min.css";
-import { Provider } from 'react-redux';
 import "../StyleSheet/App.scss";
-import store from "./Store";
+import Nav from "./common/Nav";
 
 function App() {
   return (
-    <Provider store={store}>
-      <div className="mainApp">
-        <div className="header">VOCABULARY</div>
-        <TopicsContainer />
-      </div>
-    </Provider>
+    <div className="mainApp">
+      <Router history={hashHistory}>
+        <Nav />
+        <Route exact path="/" component={VocabsPanes} />
+        <Route exact path="/vocab" component={VocabsPanes} />
+        <Route exact path="/writing" component={WritingContainer} />
+        <Route exact path={`/writing/:writingId`} component={WritingContent} />
+      </Router>
+    </div>
   );
 }
 

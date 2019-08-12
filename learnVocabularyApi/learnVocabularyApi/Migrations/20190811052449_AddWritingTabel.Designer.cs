@@ -2,15 +2,17 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using learnVocabularyApi.Data;
 
 namespace learnVocabularyApi.Migrations
 {
     [DbContext(typeof(LearnEnglishContext))]
-    partial class LearnVocabularyContextModelSnapshot : ModelSnapshot
+    [Migration("20190811052449_AddWritingTabel")]
+    partial class AddWritingTabel
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -50,8 +52,6 @@ namespace learnVocabularyApi.Migrations
                     b.Property<string>("Content");
 
                     b.Property<string>("Topic");
-
-                    b.Property<int>("TotalWords");
 
                     b.HasKey("id");
 

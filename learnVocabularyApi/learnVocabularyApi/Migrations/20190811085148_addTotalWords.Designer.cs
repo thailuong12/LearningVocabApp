@@ -8,9 +8,9 @@ using learnVocabularyApi.Data;
 
 namespace learnVocabularyApi.Migrations
 {
-    [DbContext(typeof(LearnVocabularyContext))]
-    [Migration("20190808030544_InitMigration")]
-    partial class InitMigration
+    [DbContext(typeof(LearnEnglishContext))]
+    [Migration("20190811085148_addTotalWords")]
+    partial class addTotalWords
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -20,7 +20,7 @@ namespace learnVocabularyApi.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("learnVocabularyApi.Models.Topic", b =>
+            modelBuilder.Entity("learnVocabularyApi.Models.Vocab", b =>
                 {
                     b.Property<string>("id")
                         .ValueGeneratedOnAdd();
@@ -28,6 +28,10 @@ namespace learnVocabularyApi.Migrations
                     b.Property<string>("Description");
 
                     b.Property<string>("Example");
+
+                    b.Property<bool>("IsLearning");
+
+                    b.Property<bool>("IsMarked");
 
                     b.Property<string>("Name");
 
@@ -37,7 +41,23 @@ namespace learnVocabularyApi.Migrations
 
                     b.HasKey("id");
 
-                    b.ToTable("Topics");
+                    b.ToTable("Vocab");
+                });
+
+            modelBuilder.Entity("learnVocabularyApi.Models.Writing", b =>
+                {
+                    b.Property<string>("id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Content");
+
+                    b.Property<string>("Topic");
+
+                    b.Property<int>("TotalWords");
+
+                    b.HasKey("id");
+
+                    b.ToTable("Writing");
                 });
 #pragma warning restore 612, 618
         }

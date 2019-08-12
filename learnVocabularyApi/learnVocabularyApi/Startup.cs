@@ -35,7 +35,7 @@ namespace learnVocabularyApi
                        .AllowAnyHeader();
             }));
             string connectionString = Configuration.GetConnectionString("DefaultConnection");
-            services.AddDbContext<LearnVocabularyContext>(options => options.UseSqlServer(connectionString));
+            services.AddDbContext<LearnEnglishContext>(options => options.UseSqlServer(connectionString));
             services.Configure<MvcOptions>(options =>
             {
                 options.Filters.Add(new CorsAuthorizationFilterFactory("MyPolicy"));

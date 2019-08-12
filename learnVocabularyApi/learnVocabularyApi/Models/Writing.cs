@@ -6,14 +6,12 @@ using System.Threading.Tasks;
 
 namespace learnVocabularyApi.Models
 {
-    public class Topic
+    public class Writing
     {
         [Key]
         public string id { get; set; }
-        public string Name { get; set; }
-        public string Description { get; set; }
-        public string Type { get; set; }
-        public string Pronunciation { get; set; }
-        public string Example { get; set; }
+        public string Topic { get; set; }
+        public string Content { get; set; }
+        public Int32 TotalWords { get; set; }
     }
 }
